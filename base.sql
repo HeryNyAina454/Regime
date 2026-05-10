@@ -30,3 +30,5 @@ CREATE TABLE regimes (
     price DECIMAL(10,2),
     duration_days INT
 );
+
+ALTER TABLE user_profiles ADD COLUMN goal ENUM('gain', 'lose', 'ideal') DEFAULT NULL;

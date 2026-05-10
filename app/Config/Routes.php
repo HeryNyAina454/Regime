@@ -18,3 +18,6 @@ $routes->get('dashboard', 'Dashboard::index');
 
 // Back office (protégé — à compléter plus tard)
 // $routes->get('admin/dashboard', 'Admin\Dashboard::index');
+
+$routes->get('profile', 'Profile::index');
+$routes->post('profile/save-goal', 'Profile::saveGoal');

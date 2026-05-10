@@ -1,0 +1,132 @@
+<?= $this->extend('layouts/main') ?>
+<?= $this->section('content') ?>
+
+<div class="suggestions-wrapper">
+
+    <!-- En-tête résumé -->
+    <div class="suggestions-hero">
+        <div class="hero-left">
+            <p class="hero-label">Votre objectif</p>
+            <h1 class="hero-title"><?= esc($goalLabel) ?></h1>
+            <p class="hero-sub">IMC actuel : <strong><?= $imc ?></strong> — Voici les programmes adaptés</p>
+        </div>
+        <div class="hero-wallet">
+            <div class="wallet-info">
+                <span class="wallet-label">Portefeuille</span>
+                <span class="wallet-amount"><?= number_format($wallet['balance'], 2) ?> €</span>
+            </div>
+            <?php if ($wallet['is_gold']): ?>
+                <span class="badge-gold">⭐ Gold — 15% de remise</span>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <!-- Alertes -->
+    <?php if (session()->getFlashdata('success')): ?>
+        <div class="alert alert-success">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <?= session()->getFlashdata('success') ?>
+        </div>
+    <?php endif; ?>
+    <?php if (session()->getFlashdata('error')): ?>
+        <div class="alert alert-error">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <?= session()->getFlashdata('error') ?>
+        </div>
+    <?php endif; ?>
+
+    <!-- Régimes suggérés -->
+    <section class="section-block">
+        <h2 class="section-title">
+            <span class="section-icon">🥗</span> Régimes recommandés
+        </h2>
+
+        <div class="cards-grid">
+            <?php foreach ($regimes as $regime): ?>
+            <?php
+                $isOwned    = in_array($regime['id'], $orderedIds);
+                $price      = $regime['price'];
+                $priceGold  = round($price * 0.85, 2);
+                $showGold   = $wallet['is_gold'];
+            ?>
+            <div class="regime-card <?= $isOwned ? 'owned' : '' ?>">
+                <?php if ($isOwned): ?>
+                    <span class="card-badge badge-owned">✓ Acheté</span>
+                <?php endif; ?>
+
+                <div class="card-header">
+                    <h3 class="card-title"><?= esc($regime['name']) ?></h3>
+                    <div class="card-duration"><?= $regime['duration_days'] ?> jours</div>
+                </div>
+
+                <p class="card-desc"><?= esc($regime['description']) ?></p>
+
+                <!-- Composition -->
+                <div class="composition">
+                    <div class="comp-bar">
+                        <div class="comp-seg seg-meat"    style="width:<?= $regime['meat_pct'] ?>%"    title="Viande <?= $regime['meat_pct'] ?>%"></div>
+                        <div class="comp-seg seg-fish"    style="width:<?= $regime['fish_pct'] ?>%"    title="Poisson <?= $regime['fish_pct'] ?>%"></div>
+                        <div class="comp-seg seg-poultry" style="width:<?= $regime['poultry_pct'] ?>%" title="Volaille <?= $regime['poultry_pct'] ?>%"></div>
+                    </div>
+                    <div class="comp-legend">
+                        <span><i class="dot dot-meat"></i> Viande <?= $regime['meat_pct'] ?>%</span>
+                        <span><i class="dot dot-fish"></i> Poisson <?= $regime['fish_pct'] ?>%</span>
+                        <span><i class="dot dot-poultry"></i> Volaille <?= $regime['poultry_pct'] ?>%</span>
+                    </div>
+                </div>
+
+                <!-- Prix & achat -->
+                <div class="card-footer">
+                    <div class="price-block">
+                        <?php if ($showGold): ?>
+                            <span class="price-original"><?= number_format($price, 2) ?> €</span>
+                            <span class="price-main"><?= number_format($priceGold, 2) ?> €</span>
+                        <?php else: ?>
+                            <span class="price-main"><?= number_format($price, 2) ?> €</span>
+                        <?php endif; ?>
+                    </div>
+
+                    <?php if (!$isOwned): ?>
+                    <form method="post" action="/suggestions/buy">
+                        <?= csrf_field() ?>
+                        <input type="hidden" name="regime_id" value="<?= $regime['id'] ?>">
+                        <button type="submit" class="btn-buy">Acheter</button>
+                    </form>
+                    <?php else: ?>
+                        <span class="btn-owned">Programme actif</span>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
+
+    <!-- Activités sportives -->
+    <section class="section-block">
+        <h2 class="section-title">
+            <span class="section-icon">🏃</span> Activités sportives conseillées
+        </h2>
+
+        <div class="activities-grid">
+            <?php foreach ($activities as $activity): ?>
+            <div class="activity-card">
+                <div class="activity-header">
+                    <h3 class="activity-name"><?= esc($activity['name']) ?></h3>
+                    <div class="activity-meta">
+                        <span>⏱ <?= $activity['duration_minutes'] ?> min</span>
+                        <span>📅 <?= $activity['frequency_per_week'] ?>x / semaine</span>
+                    </div>
+                </div>
+                <p class="activity-desc"><?= esc($activity['description']) ?></p>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
+
+    <div class="suggestions-footer">
+        <a href="/profile" class="btn-secondary">← Changer d'objectif</a>
+    </div>
+
+</div>
+
+<?= $this->endSection() ?>

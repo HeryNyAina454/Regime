@@ -21,3 +21,6 @@ $routes->get('dashboard', 'Dashboard::index');
 
 $routes->get('profile', 'Profile::index');
 $routes->post('profile/save-goal', 'Profile::saveGoal');
+
+$routes->get('suggestions',  'Suggestions::index');
+$routes->post('suggestions/buy', 'Suggestions::buy');

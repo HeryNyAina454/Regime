@@ -10,6 +10,7 @@
         <nav class="header-nav">
             <a href="/dashboard" class="nav-link <?= (uri_string() === 'dashboard') ? 'active' : '' ?>">Accueil</a>
             <a href="/profile"   class="nav-link <?= (uri_string() === 'profile')   ? 'active' : '' ?>">Mon profil</a>
+            <a href="/suggestions" class="nav-link <?= (uri_string() === 'suggestions') ? 'active' : '' ?>">Suggestions</a>
         </nav>
 
         <!-- User menu -->

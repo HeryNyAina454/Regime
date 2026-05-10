@@ -9,11 +9,6 @@
 
             <!-- Brand -->
             <div class="auth-brand">
-                <div class="brand-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.93V18a1 1 0 0 1-2 0v-1.07A8 8 0 0 1 4.07 11H6a1 1 0 0 1 0 2 6 6 0 0 0 5 5.92zm0-9.86A6 6 0 0 0 7.08 11H6a1 1 0 0 1 0-2 8 8 0 0 1 6.93-4V6a1 1 0 0 1 2 0v-.93A8 8 0 0 1 19.93 11H18a1 1 0 0 1 0-2 6 6 0 0 0-5-5.93z"/>
-                    </svg>
-                </div>
                 <span class="brand-name">RégimePro</span>
             </div>
 

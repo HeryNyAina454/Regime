@@ -8,12 +8,12 @@
         <div class="hero-left">
             <p class="hero-label">Votre objectif</p>
             <h1 class="hero-title"><?= esc($goalLabel) ?></h1>
-            <p class="hero-sub">IMC actuel : <strong><?= $imc ?></strong> — Voici les programmes adaptés</p>
+            <p class="hero-sub">IMC actuel : <strong><?= $imc ?></strong> — Voici les programmes adaptés pour vous</p>
         </div>
         <div class="hero-wallet">
             <div class="wallet-info">
-                <span class="wallet-label">Portefeuille</span>
-                <span class="wallet-amount"><?= number_format($wallet['balance'], 2) ?> €</span>
+                <div class="wallet-label">Portefeuille</div>
+                <div class="wallet-amount"><?= number_format($wallet['balance'], 2) ?> €</div>
             </div>
             <?php if ($wallet['is_gold']): ?>
                 <span class="badge-gold">⭐ Gold — 15% de remise</span>
@@ -24,14 +24,20 @@
     <!-- Alertes -->
     <?php if (session()->getFlashdata('success')): ?>
         <div class="alert alert-success">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            <?= session()->getFlashdata('success') ?>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            <span><?= session()->getFlashdata('success') ?></span>
         </div>
     <?php endif; ?>
     <?php if (session()->getFlashdata('error')): ?>
         <div class="alert alert-error">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <?= session()->getFlashdata('error') ?>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <span><?= session()->getFlashdata('error') ?></span>
         </div>
     <?php endif; ?>
 
@@ -132,9 +138,14 @@
         </div>
     </section>
 
-    <div class="suggestions-footer">
-        <a href="/profile" class="btn-secondary">← Changer d'objectif</a>
-    </div>
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Besoin de changer d'objectif ?</h2>
+            <p>Retournez à votre profil pour mettre à jour vos informations et découvrir de nouveaux régimes</p>
+            <a href="/profile" class="cta-btn">← Modifier mon objectif</a>
+        </div>
+    </section>
 
 </div>
 

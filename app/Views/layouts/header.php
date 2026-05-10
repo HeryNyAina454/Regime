@@ -11,12 +11,8 @@
             <a href="/dashboard"   class="nav-link <?= (uri_string() === 'dashboard')   ? 'active' : '' ?>">Accueil</a>
             <a href="/profile"     class="nav-link <?= (uri_string() === 'profile')     ? 'active' : '' ?>">Mon profil</a>
             <a href="/suggestions" class="nav-link <?= (uri_string() === 'suggestions') ? 'active' : '' ?>">Suggestions</a>
-<<<<<<< HEAD
-            <a href="/wallet"      class="nav-link <?= (uri_string() === 'wallet')      ? 'active' : '' ?>">💳 Portefeuille</a>
-            <a href="/gold"        class="nav-link nav-gold <?= (uri_string() === 'gold') ? 'active' : '' ?>">⭐ Gold</a>
-=======
             <a href="/wallet"      class="nav-link <?= (uri_string() === 'wallet')      ? 'active' : '' ?>">Portefeuille</a>
->>>>>>> Dev
+            <a href="/gold"        class="nav-link nav-gold <?= (uri_string() === 'gold') ? 'active' : '' ?>">Gold</a>
         </nav>
 
         <!-- User menu -->

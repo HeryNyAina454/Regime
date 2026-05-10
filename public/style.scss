@@ -1,0 +1,1148 @@
+// ============================================================
+//  RégimePro — Design System SCSS
+//  Copier dans public/style.scss (ou compiler en style.css)
+// ============================================================
+
+// ─── FONTS ──────────────────────────────────────────────────
+// Importez dans vos layouts (déjà dans admin.php & auth.php) :
+// <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+// ─── VARIABLES ───────────────────────────────────────────────
+$font-display : 'Syne', sans-serif;
+$font-body    : 'DM Sans', sans-serif;
+
+$primary      : #1a6b5a;
+$primary-dark : #124d41;
+$primary-light: #e8f5f1;
+$accent       : #e8a838;
+$accent-dark  : #c48a20;
+$accent-light : #fef7e8;
+
+$blue         : #2563a8;
+$blue-light   : #e8f0fb;
+$green        : #16a34a;
+$green-light  : #dcfce7;
+$orange       : #ea580c;
+$orange-light : #fff0e6;
+$red          : #dc2626;
+$red-light    : #fee2e2;
+$purple       : #7c3aed;
+$purple-light : #ede9fe;
+$teal         : #0d9488;
+$teal-light   : #ccfbf1;
+$gold         : #d97706;
+$gold-light   : #fef3c7;
+
+$white        : #ffffff;
+$gray-50      : #f8fafc;
+$gray-100     : #f1f5f9;
+$gray-200     : #e2e8f0;
+$gray-300     : #cbd5e1;
+$gray-400     : #94a3b8;
+$gray-500     : #64748b;
+$gray-600     : #475569;
+$gray-700     : #334155;
+$gray-800     : #1e293b;
+$gray-900     : #0f172a;
+
+$radius-sm    : 8px;
+$radius-md    : 12px;
+$radius-lg    : 16px;
+$radius-xl    : 24px;
+$radius-pill  : 999px;
+
+$shadow-sm    : 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+$shadow-md    : 0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+$shadow-lg    : 0 12px 40px rgba(0,0,0,.10), 0 4px 12px rgba(0,0,0,.06);
+$shadow-card  : 0 2px 12px rgba(26,107,90,.08);
+
+$transition   : .2s ease;
+$transition-md: .3s ease;
+
+// ─── RESET & BASE ────────────────────────────────────────────
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family   : $font-body;
+  color         : $gray-800;
+  background    : $gray-50;
+  line-height   : 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: $primary; text-decoration: none; transition: color $transition; &:hover { color: $primary-dark; } }
+img { max-width: 100%; display: block; }
+button { cursor: pointer; font-family: inherit; }
+
+// ─── CSS CUSTOM PROPERTIES (pour les composants inline) ─────
+:root {
+  --primary      : #{$primary};
+  --primary-dark : #{$primary-dark};
+  --accent       : #{$accent};
+  --blue         : #{$blue};
+  --green        : #{$green};
+  --orange       : #{$orange};
+  --red          : #{$red};
+  --purple       : #{$purple};
+  --teal         : #{$teal};
+  --gold         : #{$gold};
+  --radius-md    : #{$radius-md};
+  --shadow-md    : #{$shadow-md};
+}
+
+// ════════════════════════════════════════════════════════════
+//  1. LAYOUT — HEADER & FOOTER (layout/main)
+// ════════════════════════════════════════════════════════════
+
+.site-header {
+  position  : sticky;
+  top       : 0;
+  z-index   : 100;
+  background: $white;
+  border-bottom: 1px solid $gray-200;
+  box-shadow: 0 1px 0 rgba(0,0,0,.04);
+}
+
+.header-inner {
+  max-width : 1280px;
+  margin    : 0 auto;
+  padding   : 0 1.5rem;
+  height    : 64px;
+  display   : flex;
+  align-items: center;
+  gap       : 2rem;
+}
+
+.header-brand {
+  display    : flex;
+  align-items: center;
+  gap        : .5rem;
+  text-decoration: none;
+  .brand-name {
+    font-family: $font-display;
+    font-size  : 1.35rem;
+    font-weight: 800;
+    color      : $primary;
+    letter-spacing: -.02em;
+  }
+}
+
+.header-nav {
+  display   : flex;
+  align-items: center;
+  gap       : .25rem;
+  margin-left: auto;
+}
+
+.nav-link {
+  padding    : .45rem .85rem;
+  border-radius: $radius-sm;
+  font-size  : .875rem;
+  font-weight: 500;
+  color      : $gray-600;
+  transition : all $transition;
+  &:hover    { color: $primary; background: $primary-light; }
+  &.active   { color: $primary; background: $primary-light; font-weight: 600; }
+  &.nav-gold { color: $gold; &:hover { background: $gold-light; } &.active { background: $gold-light; } }
+}
+
+.header-user {
+  display    : flex;
+  align-items: center;
+  gap        : .75rem;
+  padding-left: 1rem;
+  border-left: 1px solid $gray-200;
+  .user-name { font-size: .875rem; font-weight: 600; color: $gray-700; }
+}
+
+.btn-logout {
+  display    : flex;
+  align-items: center;
+  gap        : .4rem;
+  padding    : .4rem .8rem;
+  border-radius: $radius-sm;
+  font-size  : .8rem;
+  font-weight: 500;
+  color      : $gray-500;
+  border     : 1px solid $gray-200;
+  transition : all $transition;
+  &:hover    { color: $red; border-color: $red; background: $red-light; }
+}
+
+.burger {
+  display    : none;
+  flex-direction: column;
+  gap        : 5px;
+  background : none;
+  border     : none;
+  padding    : .4rem;
+  margin-left: auto;
+  span { display: block; width: 22px; height: 2px; background: $gray-600; border-radius: 2px; transition: $transition; }
+}
+
+.site-footer {
+  margin-top: 4rem;
+  border-top: 1px solid $gray-200;
+  background: $white;
+}
+.footer-inner {
+  max-width : 1280px;
+  margin    : 0 auto;
+  padding   : 1.25rem 1.5rem;
+  display   : flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size : .8rem;
+  color     : $gray-400;
+  .footer-brand { font-weight: 600; color: $gray-500; }
+}
+
+.main-content {
+  max-width : 1280px;
+  margin    : 0 auto;
+  padding   : 2rem 1.5rem 3rem;
+}
+
+// ════════════════════════════════════════════════════════════
+//  2. AUTH LAYOUT (login, register)
+// ════════════════════════════════════════════════════════════
+
+body:not(.admin-body) > main:not(.main-content) {
+  min-height : 100vh;
+  display    : flex;
+  align-items: center;
+  justify-content: center;
+  background : linear-gradient(135deg, #eaf7f3 0%, #f8fafc 60%, #fef7e8 100%);
+  padding    : 1.5rem;
+}
+
+.auth-wrapper {
+  width      : 100%;
+  max-width  : 460px;
+  margin     : 0 auto;
+  display    : flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-card {
+  width      : 100%;
+  background : $white;
+  border-radius: $radius-xl;
+  box-shadow : $shadow-lg;
+  padding    : 2.5rem 2rem;
+  border     : 1px solid rgba($primary, .08);
+}
+
+.auth-header {
+  text-align : center;
+  margin-bottom: 1.75rem;
+}
+
+.auth-icon {
+  width      : 64px;
+  height     : 64px;
+  border-radius: $radius-lg;
+  display    : flex;
+  align-items: center;
+  justify-content: center;
+  margin     : 0 auto 1rem;
+  box-shadow : 0 8px 24px rgba($primary, .25);
+}
+
+.auth-brand { text-align: center; margin-bottom: 1rem; }
+.brand-name { font-family: $font-display; font-size: 1.5rem; font-weight: 800; color: $primary; }
+
+.auth-title {
+  font-family: $font-display;
+  font-size  : 1.6rem;
+  font-weight: 700;
+  color      : $gray-900;
+  letter-spacing: -.02em;
+  margin-bottom: .35rem;
+}
+
+.auth-subtitle { font-size: .9rem; color: $gray-500; line-height: 1.5; }
+
+.auth-form { display: flex; flex-direction: column; gap: 1.1rem; }
+
+.form-group { display: flex; flex-direction: column; gap: .4rem; }
+
+.form-label { font-size: .85rem; font-weight: 600; color: $gray-700; }
+
+.form-input, .form-select, .form-textarea {
+  width      : 100%;
+  padding    : .7rem 1rem;
+  border     : 1.5px solid $gray-200;
+  border-radius: $radius-md;
+  font-size  : .9rem;
+  font-family: inherit;
+  color      : $gray-800;
+  background : $gray-50;
+  transition : all $transition;
+  outline    : none;
+  &::placeholder { color: $gray-400; }
+  &:focus {
+    border-color: $primary;
+    background   : $white;
+    box-shadow   : 0 0 0 3px rgba($primary, .12);
+  }
+}
+
+.form-textarea { resize: vertical; min-height: 100px; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.auth-btn, .btn-primary {
+  width      : 100%;
+  padding    : .85rem 1.5rem;
+  background : $primary;
+  color      : $white;
+  border     : none;
+  border-radius: $radius-md;
+  font-size  : .95rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  transition : all $transition-md;
+  margin-top : .5rem;
+  &:hover {
+    background : $primary-dark;
+    transform  : translateY(-1px);
+    box-shadow : 0 6px 20px rgba($primary, .35);
+  }
+  &:active { transform: translateY(0); }
+  &:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
+}
+
+.btn-secondary {
+  display    : inline-flex;
+  align-items: center;
+  gap        : .4rem;
+  padding    : .6rem 1.2rem;
+  background : $gray-100;
+  color      : $gray-700;
+  border     : 1px solid $gray-200;
+  border-radius: $radius-md;
+  font-size  : .85rem;
+  font-weight: 500;
+  transition : all $transition;
+  &:hover { background: $gray-200; color: $gray-900; }
+}
+
+.btn-danger {
+  display    : inline-flex;
+  align-items: center;
+  gap        : .4rem;
+  padding    : .5rem 1rem;
+  background : $red-light;
+  color      : $red;
+  border     : 1px solid rgba($red, .2);
+  border-radius: $radius-sm;
+  font-size  : .8rem;
+  font-weight: 600;
+  transition : all $transition;
+  &:hover { background: $red; color: $white; }
+}
+
+.auth-footer {
+  text-align : center;
+  margin-top : 1.25rem;
+  font-size  : .875rem;
+  color      : $gray-500;
+}
+.auth-link { color: $primary; font-weight: 600; &:hover { text-decoration: underline; } }
+
+// Stepper
+.stepper {
+  display    : flex;
+  align-items: center;
+  gap        : .5rem;
+  margin-bottom: 1.75rem;
+}
+.step {
+  display    : flex;
+  align-items: center;
+  gap        : .5rem;
+  flex       : 1;
+  .step-num {
+    width      : 28px;
+    height     : 28px;
+    border-radius: 50%;
+    background : $gray-200;
+    color      : $gray-500;
+    font-size  : .8rem;
+    font-weight: 700;
+    display    : flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-label { font-size: .8rem; font-weight: 500; color: $gray-400; }
+  &.active {
+    .step-num  { background: $primary; color: $white; }
+    .step-label{ color: $primary; font-weight: 600; }
+  }
+}
+.step-line { flex: 1; height: 2px; background: $gray-200; border-radius: 2px; }
+
+// ════════════════════════════════════════════════════════════
+//  3. ALERTS
+// ════════════════════════════════════════════════════════════
+
+.alert {
+  display    : flex;
+  align-items: flex-start;
+  gap        : .65rem;
+  padding    : .875rem 1rem;
+  border-radius: $radius-md;
+  font-size  : .875rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  svg        { flex-shrink: 0; margin-top: 1px; }
+  &.alert-success {
+    background : $green-light;
+    color      : #0d7a33;
+    border     : 1px solid rgba($green, .25);
+  }
+  &.alert-error {
+    background : $red-light;
+    color      : $red;
+    border     : 1px solid rgba($red, .25);
+  }
+}
+.error-list { list-style: none; padding: 0; li { margin: .15rem 0; } }
+
+// ════════════════════════════════════════════════════════════
+//  4. DASHBOARD USER
+// ════════════════════════════════════════════════════════════
+
+.dash-wrapper { display: flex; flex-direction: column; gap: 1.75rem; }
+
+.dash-welcome {
+  display    : flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap  : wrap;
+  gap        : 1rem;
+}
+.dash-title  { font-family: $font-display; font-size: 1.75rem; font-weight: 700; color: $gray-900; letter-spacing: -.02em; }
+.dash-sub    { font-size: .9rem; color: $gray-500; margin-top: .25rem; }
+
+// KPI grid
+.kpi-grid {
+  display              : grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap                  : 1rem;
+}
+.kpi-card {
+  background   : $white;
+  border-radius: $radius-lg;
+  padding      : 1.25rem;
+  display      : flex;
+  align-items  : center;
+  gap          : 1rem;
+  box-shadow   : $shadow-card;
+  border       : 1px solid $gray-100;
+  transition   : box-shadow $transition-md;
+  &:hover      { box-shadow: $shadow-md; }
+}
+.kpi-icon {
+  width        : 46px;
+  height       : 46px;
+  border-radius: $radius-md;
+  display      : flex;
+  align-items  : center;
+  justify-content: center;
+  font-size    : 1.2rem;
+  flex-shrink  : 0;
+  svg          { width: 22px; height: 22px; }
+  &.kpi-blue   { background: $blue-light;   color: $blue;   }
+  &.kpi-green  { background: $green-light;  color: $green;  }
+  &.kpi-orange { background: $orange-light; color: $orange; }
+  &.kpi-purple { background: $purple-light; color: $purple; }
+  &.kpi-gold   { background: $gold-light;   color: $gold;   }
+  &.kpi-teal   { background: $teal-light;   color: $teal;   }
+}
+.kpi-info  { display: flex; flex-direction: column; gap: .15rem; min-width: 0; }
+.kpi-value { font-family: $font-display; font-size: 1.35rem; font-weight: 700; color: $gray-900; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kpi-label { font-size: .75rem; color: $gray-500; font-weight: 500; }
+
+// Dash grid
+.dash-grid {
+  display              : grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap                  : 1.25rem;
+}
+.dash-card {
+  background   : $white;
+  border-radius: $radius-lg;
+  padding      : 1.5rem;
+  box-shadow   : $shadow-card;
+  border       : 1px solid $gray-100;
+  &.dash-full  { grid-column: 1 / -1; }
+  &.dash-chart-card { grid-column: 1 / -1; }
+}
+.dash-card-title {
+  font-family  : $font-display;
+  font-size    : 1rem;
+  font-weight  : 700;
+  color        : $gray-800;
+  margin-bottom: 1.1rem;
+  letter-spacing: -.01em;
+}
+
+// Table
+.dash-table {
+  width        : 100%;
+  border-collapse: collapse;
+  font-size    : .875rem;
+  th {
+    text-align : left;
+    padding    : .6rem .85rem;
+    color      : $gray-500;
+    font-size  : .75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    border-bottom: 2px solid $gray-100;
+  }
+  td {
+    padding    : .75rem .85rem;
+    color      : $gray-700;
+    border-bottom: 1px solid $gray-100;
+    vertical-align: middle;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td      { background: $gray-50; }
+}
+
+// IMC block
+.imc-block {
+  display      : flex;
+  align-items  : center;
+  gap          : 1rem;
+  padding      : 1rem 1.25rem;
+  border-radius: $radius-md;
+  border       : 2px solid transparent;
+  &.imc-blue   { background: $blue-light;   border-color: rgba($blue,   .2); .imc-value { color: $blue;   } }
+  &.imc-green  { background: $green-light;  border-color: rgba($green,  .2); .imc-value { color: $green;  } }
+  &.imc-orange { background: $orange-light; border-color: rgba($orange, .2); .imc-value { color: $orange; } }
+  &.imc-red    { background: $red-light;    border-color: rgba($red,    .2); .imc-value { color: $red;    } }
+}
+.imc-value  { font-family: $font-display; font-size: 2rem; font-weight: 800; min-width: 64px; }
+.imc-info   { display: flex; flex-direction: column; gap: .2rem; }
+.imc-label  { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: $gray-500; }
+.imc-status { font-size: .9rem; font-weight: 600; color: $gray-800; }
+.imc-gauge  { flex: 1; }
+.imc-gauge-bar {
+  height       : 8px;
+  background   : $gray-200;
+  border-radius: $radius-pill;
+  overflow     : hidden;
+  margin-bottom: .4rem;
+}
+.imc-gauge-fill {
+  height       : 100%;
+  background   : linear-gradient(90deg, $blue, $green, $orange, $red);
+  border-radius: $radius-pill;
+  transition   : width .6s ease;
+}
+.imc-scale { display: flex; justify-content: space-between; font-size: .65rem; color: $gray-400; }
+
+.profile-info-row {
+  display      : flex;
+  justify-content: space-between;
+  align-items  : center;
+  padding      : .6rem 0;
+  border-bottom: 1px solid $gray-100;
+  font-size    : .875rem;
+  color        : $gray-600;
+  &:last-of-type { border-bottom: none; }
+  strong       { color: $gray-800; font-weight: 600; }
+}
+
+.empty-state { font-size: .875rem; color: $gray-400; padding: 1rem 0; text-align: center; }
+
+.debit-badge { display: inline-block; padding: .2rem .6rem; background: $red-light; color: $red; border-radius: $radius-pill; font-size: .78rem; font-weight: 600; }
+.badge-count { display: inline-block; padding: .2rem .6rem; background: $primary-light; color: $primary; border-radius: $radius-pill; font-size: .78rem; font-weight: 700; }
+.badge-gold  { display: inline-flex; align-items: center; gap: .3rem; padding: .3rem .9rem; background: $gold-light; color: $gold; border-radius: $radius-pill; font-size: .82rem; font-weight: 700; border: 1px solid rgba($gold,.25); }
+.badge-gold-sm { display: inline-flex; align-items: center; gap: .2rem; padding: .15rem .5rem; background: $gold-light; color: $gold; border-radius: $radius-pill; font-size: .72rem; font-weight: 700; }
+.badge-standard { font-size: .8rem; color: $gray-500; background: $gray-100; padding: .2rem .7rem; border-radius: $radius-pill; font-weight: 500; }
+
+// ════════════════════════════════════════════════════════════
+//  5. SUGGESTIONS (régimes cards)
+// ════════════════════════════════════════════════════════════
+
+.suggestions-wrapper { display: flex; flex-direction: column; gap: 2rem; }
+
+.suggestions-hero {
+  display      : flex;
+  align-items  : center;
+  justify-content: space-between;
+  flex-wrap    : wrap;
+  gap          : 1rem;
+  background   : $white;
+  border-radius: $radius-xl;
+  padding      : 1.75rem 2rem;
+  box-shadow   : $shadow-card;
+  border       : 1px solid $gray-100;
+}
+.hero-label  { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: $primary; margin-bottom: .25rem; }
+.hero-title  { font-family: $font-display; font-size: 1.6rem; font-weight: 800; color: $gray-900; letter-spacing: -.02em; }
+.hero-sub    { font-size: .875rem; color: $gray-500; margin-top: .35rem; }
+.hero-wallet { text-align: right; }
+.wallet-info { margin-bottom: .5rem; }
+.wallet-label{ font-size: .75rem; color: $gray-400; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; }
+.wallet-amount { font-family: $font-display; font-size: 1.75rem; font-weight: 800; color: $gray-900; }
+
+.section-block { }
+.section-title { font-family: $font-display; font-size: 1.15rem; font-weight: 700; color: $gray-800; margin-bottom: 1.25rem; display: flex; align-items: center; gap: .5rem; }
+.section-icon  { font-size: 1.1rem; }
+
+.cards-grid {
+  display              : grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap                  : 1.25rem;
+}
+
+.regime-card {
+  background   : $white;
+  border-radius: $radius-lg;
+  padding      : 1.5rem;
+  border       : 1.5px solid $gray-100;
+  box-shadow   : $shadow-card;
+  display      : flex;
+  flex-direction: column;
+  gap          : 1rem;
+  transition   : all $transition-md;
+  position     : relative;
+  &:hover      { transform: translateY(-3px); box-shadow: $shadow-lg; border-color: $primary; }
+  &.owned      { border-color: rgba($green, .3); background: linear-gradient(135deg, $white, #f0fdf4); }
+}
+
+.card-badge {
+  position     : absolute;
+  top          : -10px;
+  right        : 1rem;
+  padding      : .2rem .75rem;
+  border-radius: $radius-pill;
+  font-size    : .72rem;
+  font-weight  : 700;
+  &.badge-owned { background: $green; color: $white; }
+}
+
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; }
+.card-title  { font-family: $font-display; font-size: 1.05rem; font-weight: 700; color: $gray-900; line-height: 1.3; }
+.card-duration { font-size: .75rem; font-weight: 700; color: $primary; background: $primary-light; padding: .2rem .6rem; border-radius: $radius-pill; white-space: nowrap; }
+.card-desc   { font-size: .85rem; color: $gray-500; line-height: 1.6; }
+
+// Composition bar
+.composition  { }
+.comp-bar     { height: 10px; border-radius: $radius-pill; overflow: hidden; display: flex; margin-bottom: .5rem; }
+.comp-seg     { height: 100%; transition: width .4s ease; }
+.seg-meat     { background: #ef4444; }
+.seg-fish     { background: #3b82f6; }
+.seg-poultry  { background: #f59e0b; }
+.comp-legend  { display: flex; gap: .75rem; flex-wrap: wrap; font-size: .72rem; color: $gray-500; }
+.dot          { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: .25rem; }
+.dot-meat     { background: #ef4444; }
+.dot-fish     { background: #3b82f6; }
+.dot-poultry  { background: #f59e0b; }
+
+// Card price
+.card-price-block { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem; margin-top: auto; }
+.price-main  { font-family: $font-display; font-size: 1.5rem; font-weight: 800; color: $gray-900; }
+.price-original { font-size: .8rem; color: $gray-400; text-decoration: line-through; }
+.price-gold  { font-size: .85rem; color: $gold; font-weight: 700; }
+
+.btn-buy {
+  padding    : .65rem 1.25rem;
+  background : $primary;
+  color      : $white;
+  border     : none;
+  border-radius: $radius-md;
+  font-size  : .875rem;
+  font-weight: 700;
+  transition : all $transition;
+  white-space: nowrap;
+  &:hover    { background: $primary-dark; transform: translateY(-1px); }
+  &:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+}
+.btn-view    {
+  padding    : .65rem 1.25rem;
+  background : $primary-light;
+  color      : $primary;
+  border     : 1px solid rgba($primary, .2);
+  border-radius: $radius-md;
+  font-size  : .875rem;
+  font-weight: 700;
+  transition : all $transition;
+  &:hover    { background: $primary; color: $white; }
+}
+
+// Activities section
+.activities-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .75rem; }
+.activity-card {
+  background   : $white;
+  border-radius: $radius-md;
+  padding      : 1rem;
+  border       : 1.5px solid $gray-100;
+  display      : flex;
+  align-items  : center;
+  gap          : .75rem;
+  font-size    : .875rem;
+  font-weight  : 500;
+  color        : $gray-700;
+  box-shadow   : $shadow-sm;
+  .activity-icon { font-size: 1.4rem; }
+  &.recommended { border-color: $primary; background: $primary-light; color: $primary; }
+}
+
+// ════════════════════════════════════════════════════════════
+//  6. WALLET PAGE
+// ════════════════════════════════════════════════════════════
+
+.wallet-wrapper { display: flex; flex-direction: column; gap: 1.75rem; }
+
+.wallet-hero {
+  background   : linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+  border-radius: $radius-xl;
+  padding      : 2.25rem 2rem;
+  display      : flex;
+  align-items  : center;
+  justify-content: space-between;
+  gap          : 1.5rem;
+  color        : $white;
+  flex-wrap    : wrap;
+}
+.hero-label    { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: rgba($white, .7); margin-bottom: .5rem; }
+.wallet-balance-display { display: flex; align-items: flex-end; gap: .35rem; line-height: 1; }
+.balance-amount { font-family: $font-display; font-size: 3rem; font-weight: 800; }
+.balance-currency { font-size: 1.5rem; font-weight: 700; padding-bottom: .3rem; opacity: .8; }
+.wallet-hero .badge-gold  { margin-top: .75rem; background: rgba($gold-light, .9); }
+.wallet-hero .badge-standard { margin-top: .75rem; background: rgba($white, .15); color: rgba($white, .8); }
+
+.wallet-hero-right { display: flex; gap: 2rem; flex-wrap: wrap; }
+.wallet-stat { text-align: center; }
+.wstat-value  { display: block; font-family: $font-display; font-size: 2rem; font-weight: 800; color: $white; }
+.wstat-label  { font-size: .75rem; color: rgba($white, .7); font-weight: 500; }
+
+.wallet-grid {
+  display              : grid;
+  grid-template-columns: 1fr 1fr;
+  gap                  : 1.25rem;
+}
+.wallet-col  { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.wallet-card {
+  background   : $white;
+  border-radius: $radius-lg;
+  padding      : 1.5rem;
+  box-shadow   : $shadow-card;
+  border       : 1px solid $gray-100;
+}
+.wallet-card-title {
+  font-family  : $font-display;
+  font-size    : 1rem;
+  font-weight  : 700;
+  color        : $gray-800;
+  display      : flex;
+  align-items  : center;
+  gap          : .5rem;
+  margin-bottom: .5rem;
+}
+.wallet-card-desc { font-size: .85rem; color: $gray-500; margin-bottom: 1rem; }
+
+.code-form { }
+.code-input-group {
+  display      : flex;
+  gap          : .5rem;
+  margin-bottom: .5rem;
+  input        { flex: 1; }
+}
+.btn-recharge {
+  padding    : .7rem 1.25rem;
+  background : $primary;
+  color      : $white;
+  border     : none;
+  border-radius: $radius-md;
+  font-weight: 700;
+  font-size  : .875rem;
+  white-space: nowrap;
+  transition : all $transition;
+  &:hover    { background: $primary-dark; }
+}
+.code-hint { font-size: .75rem; color: $gray-400; }
+
+.history-list { display: flex; flex-direction: column; gap: .5rem; margin-top: .5rem; }
+.history-item {
+  display      : flex;
+  justify-content: space-between;
+  align-items  : center;
+  padding      : .75rem .85rem;
+  background   : $gray-50;
+  border-radius: $radius-md;
+  border       : 1px solid $gray-100;
+}
+.history-left  { display: flex; flex-direction: column; gap: .15rem; }
+.history-code  { font-size: .875rem; font-weight: 700; color: $gray-800; font-family: monospace; }
+.history-regime{ font-size: .875rem; font-weight: 600; color: $gray-800; }
+.history-date  { font-size: .73rem; color: $gray-400; }
+.history-amount {
+  font-size    : .9rem;
+  font-weight  : 700;
+  white-space  : nowrap;
+  &.credit { color: $green; }
+  &.debit  { color: $red; }
+}
+
+.wallet-balance-row {
+  display      : flex;
+  justify-content: space-between;
+  align-items  : center;
+  padding      : .75rem 1rem;
+  border-radius: $radius-md;
+  margin-bottom: 1rem;
+  font-size    : .875rem;
+  font-weight  : 600;
+  &.sufficient   { background: $green-light; color: $green; }
+  &.insufficient { background: $red-light; color: $red; }
+}
+
+// ════════════════════════════════════════════════════════════
+//  7. GOLD PAGE
+// ════════════════════════════════════════════════════════════
+
+.gold-wrapper { display: flex; flex-direction: column; gap: 2rem; max-width: 900px; margin: 0 auto; }
+
+.gold-hero {
+  text-align   : center;
+  padding      : 3rem 2rem;
+  background   : linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border-radius: $radius-xl;
+  color        : $white;
+}
+.gold-stars  { font-size: 1.5rem; color: $gold; letter-spacing: .5rem; margin-bottom: .75rem; }
+.gold-hero-title {
+  font-family: $font-display;
+  font-size  : 2.75rem;
+  font-weight: 800;
+  letter-spacing: -.03em;
+  margin-bottom: .5rem;
+  span { color: $gold; }
+}
+.gold-hero-sub { font-size: 1rem; color: rgba($white, .7); }
+
+.gold-layout {
+  display              : grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap                  : 1.5rem;
+}
+
+.gold-benefits-card,
+.gold-payment-card {
+  background   : $white;
+  border-radius: $radius-xl;
+  padding      : 2rem;
+  box-shadow   : $shadow-card;
+  border       : 1px solid $gray-100;
+}
+
+.gold-section-title {
+  font-family  : $font-display;
+  font-size    : 1.1rem;
+  font-weight  : 700;
+  color        : $gray-800;
+  margin-bottom: 1.25rem;
+}
+
+.benefits-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+.benefit-item  { display: flex; align-items: flex-start; gap: .85rem; }
+.benefit-icon  {
+  width        : 40px;
+  height       : 40px;
+  border-radius: $radius-md;
+  background   : $gold-light;
+  color        : $gold;
+  display      : flex;
+  align-items  : center;
+  justify-content: center;
+  font-size    : 1rem;
+  font-weight  : 700;
+  flex-shrink  : 0;
+}
+.benefit-text  { display: flex; flex-direction: column; gap: .2rem; strong { font-size: .9rem; color: $gray-800; } span { font-size: .8rem; color: $gray-500; } }
+
+.savings-example {
+  margin-top   : 1.5rem;
+  padding      : 1rem;
+  background   : $gray-50;
+  border-radius: $radius-md;
+  border       : 1px solid $gray-200;
+}
+.savings-title { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: $gray-400; margin-bottom: .75rem; }
+.savings-row   { display: flex; justify-content: space-between; padding: .35rem 0; font-size: .875rem; color: $gray-600; &.highlight { color: $green; font-weight: 600; } &.total { border-top: 1px solid $gray-200; margin-top: .35rem; padding-top: .5rem; } }
+.savings-before{ text-decoration: line-through; color: $gray-400; }
+.savings-after { font-weight: 700; }
+.savings-gain  { font-weight: 800; color: $green; }
+
+.gold-price-display {
+  display      : flex;
+  align-items  : flex-end;
+  gap          : .4rem;
+  margin-bottom: 1.5rem;
+  line-height  : 1;
+}
+.gold-price-amount { font-family: $font-display; font-size: 3rem; font-weight: 800; color: $gray-900; }
+.gold-price-currency { font-size: 1.5rem; font-weight: 700; color: $gray-500; padding-bottom: .3rem; }
+.gold-price-label { font-size: .8rem; color: $gray-400; padding-bottom: .4rem; margin-left: .25rem; }
+
+.insufficient-msg {
+  display      : flex;
+  align-items  : center;
+  gap          : .4rem;
+  font-size    : .82rem;
+  color        : $red;
+  margin-bottom: 1rem;
+  a            { color: $primary; font-weight: 600; &:hover { text-decoration: underline; } }
+}
+
+.btn-gold-activate {
+  width        : 100%;
+  padding      : 1rem;
+  background   : linear-gradient(135deg, $gold, $accent-dark);
+  color        : $white;
+  border       : none;
+  border-radius: $radius-md;
+  font-size    : 1rem;
+  font-weight  : 700;
+  transition   : all $transition-md;
+  &:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 24px rgba($gold, .4); }
+  &.disabled, &:disabled { opacity: .5; cursor: not-allowed; }
+}
+.btn-gold-action { display: inline-block; margin-top: 1rem; padding: .7rem 1.5rem; background: $gold; color: $white; border-radius: $radius-md; font-weight: 700; transition: all $transition; &:hover { background: $accent-dark; } }
+.gold-notice { font-size: .78rem; color: $gray-400; text-align: center; margin-top: .75rem; }
+
+.already-gold { text-align: center; padding: 1.5rem 0; }
+.gold-check { width: 56px; height: 56px; background: $gold; color: $white; font-size: 1.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; }
+
+// ════════════════════════════════════════════════════════════
+//  8. ADMIN LAYOUT
+// ════════════════════════════════════════════════════════════
+
+.admin-body {
+  display  : flex;
+  min-height: 100vh;
+  background: $gray-50;
+  // override header/footer display if any
+  > .site-header, > .site-footer { display: none; }
+}
+
+.admin-sidebar {
+  width         : 248px;
+  min-height    : 100vh;
+  background    : $gray-900;
+  display       : flex;
+  flex-direction: column;
+  flex-shrink   : 0;
+  position      : sticky;
+  top           : 0;
+  height        : 100vh;
+  overflow-y    : auto;
+}
+
+.sidebar-brand {
+  display      : flex;
+  flex-direction: column;
+  padding      : 1.75rem 1.5rem 1.5rem;
+  border-bottom: 1px solid rgba($white, .06);
+  .brand-icon  { width: 38px; height: 38px; background: $primary; border-radius: $radius-md; display: flex; align-items: center; justify-content: center; margin-bottom: .75rem; }
+  span         { font-family: $font-display; font-size: 1.1rem; font-weight: 800; color: $white; }
+  small        { font-size: .72rem; color: rgba($white, .4); font-weight: 500; text-transform: uppercase; letter-spacing: .08em; }
+}
+
+.sidebar-nav {
+  flex   : 1;
+  padding: 1rem .75rem;
+  display: flex;
+  flex-direction: column;
+  gap    : .15rem;
+}
+
+.sidebar-link {
+  display      : flex;
+  align-items  : center;
+  gap          : .75rem;
+  padding      : .65rem .85rem;
+  border-radius: $radius-md;
+  font-size    : .875rem;
+  font-weight  : 500;
+  color        : rgba($white, .6);
+  transition   : all $transition;
+  svg          { flex-shrink: 0; }
+  &:hover      { background: rgba($white, .06); color: $white; }
+  &.active     { background: $primary; color: $white; font-weight: 600; box-shadow: 0 4px 12px rgba($primary, .4); }
+}
+
+.sidebar-footer {
+  padding      : 1rem .75rem 1.5rem;
+  border-top   : 1px solid rgba($white, .06);
+}
+.sidebar-logout {
+  display      : flex;
+  align-items  : center;
+  gap          : .6rem;
+  padding      : .6rem .85rem;
+  border-radius: $radius-md;
+  font-size    : .8rem;
+  font-weight  : 500;
+  color        : rgba($white, .4);
+  transition   : all $transition;
+  &:hover      { color: #fc8181; background: rgba($red, .1); }
+}
+
+.admin-main {
+  flex   : 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.admin-topbar {
+  background   : $white;
+  border-bottom: 1px solid $gray-200;
+  padding      : 1rem 2rem;
+  display      : flex;
+  align-items  : center;
+  justify-content: space-between;
+  position     : sticky;
+  top          : 0;
+  z-index      : 10;
+}
+.admin-page-title { font-family: $font-display; font-size: 1.2rem; font-weight: 700; color: $gray-900; }
+.admin-user { font-size: .875rem; color: $gray-500; font-weight: 500; }
+
+.admin-content { padding: 2rem; flex: 1; }
+
+// CRUD pages
+.crud-topbar { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+.crud-title  { font-family: $font-display; font-size: 1.4rem; font-weight: 700; color: $gray-900; }
+.crud-sub    { font-size: .85rem; color: $gray-400; margin-top: .2rem; }
+.crud-table-wrap { background: $white; border-radius: $radius-lg; box-shadow: $shadow-card; border: 1px solid $gray-100; overflow: hidden; }
+
+.btn-primary { width: auto; display: inline-flex; align-items: center; gap: .4rem; }
+
+.goal-badge {
+  display      : inline-block;
+  padding      : .2rem .65rem;
+  border-radius: $radius-pill;
+  font-size    : .75rem;
+  font-weight  : 700;
+  &.kpi-blue   { background: $blue-light;   color: $blue;   }
+  &.kpi-green  { background: $green-light;  color: $green;  }
+  &.kpi-orange { background: $orange-light; color: $orange; }
+}
+
+// Modal
+.modal-overlay {
+  display          : none;
+  position         : fixed;
+  inset            : 0;
+  background       : rgba($gray-900, .5);
+  z-index          : 200;
+  align-items      : center;
+  justify-content  : center;
+  padding          : 1rem;
+  backdrop-filter  : blur(4px);
+  &.open           { display: flex; }
+}
+.modal-box {
+  background   : $white;
+  border-radius: $radius-xl;
+  box-shadow   : $shadow-lg;
+  width        : 100%;
+  max-width    : 540px;
+  max-height   : 90vh;
+  overflow-y   : auto;
+  padding      : 2rem;
+}
+.modal-title { font-family: $font-display; font-size: 1.2rem; font-weight: 700; color: $gray-900; margin-bottom: 1.5rem; }
+.modal-actions { display: flex; gap: .75rem; justify-content: flex-end; margin-top: 1.5rem; }
+.btn-cancel  { padding: .65rem 1.25rem; background: $gray-100; color: $gray-600; border: 1px solid $gray-200; border-radius: $radius-md; font-size: .875rem; font-weight: 600; transition: all $transition; &:hover { background: $gray-200; } }
+
+// Settings
+.settings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+.settings-card { background: $white; border-radius: $radius-lg; padding: 1.5rem; box-shadow: $shadow-card; border: 1px solid $gray-100; }
+.settings-title { font-family: $font-display; font-size: 1rem; font-weight: 700; color: $gray-800; margin-bottom: 1rem; }
+
+// ════════════════════════════════════════════════════════════
+//  9. PROFILE / GOAL PICKER
+// ════════════════════════════════════════════════════════════
+
+.goal-heading { font-size: .875rem; font-weight: 700; color: $gray-700; margin-bottom: .75rem; text-transform: uppercase; letter-spacing: .06em; }
+.goal-grid    { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin-bottom: 1.25rem; }
+.goal-card {
+  border       : 2px solid $gray-200;
+  border-radius: $radius-lg;
+  padding      : 1rem;
+  cursor       : pointer;
+  text-align   : center;
+  transition   : all $transition-md;
+  position     : relative;
+  input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+  .goal-icon   { font-size: 1.5rem; margin-bottom: .5rem; }
+  .goal-title  { font-size: .8rem; font-weight: 700; color: $gray-800; margin-bottom: .25rem; }
+  .goal-desc   { font-size: .72rem; color: $gray-500; line-height: 1.4; }
+  &:hover      { border-color: $primary; background: $primary-light; }
+  &.selected   { border-color: $primary; background: $primary-light; .goal-title { color: $primary; } }
+}
+
+// ════════════════════════════════════════════════════════════
+//  10. RESPONSIVE
+// ════════════════════════════════════════════════════════════
+
+@media (max-width: 900px) {
+  .dash-grid       { grid-template-columns: 1fr; }
+  .wallet-grid     { grid-template-columns: 1fr; }
+  .gold-layout     { grid-template-columns: 1fr; }
+  .goal-grid       { grid-template-columns: 1fr; }
+  .admin-sidebar   { display: none; } // gérer avec un burger si besoin
+  .admin-main      { width: 100%; }
+  .admin-content   { padding: 1rem; }
+}
+
+@media (max-width: 640px) {
+  .header-nav      { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: $white; padding: 1rem; border-bottom: 1px solid $gray-200; box-shadow: $shadow-md; &.open { display: flex; } }
+  .burger          { display: flex; }
+  .header-user     { display: none; }
+  .header-inner    { flex-wrap: wrap; }
+  .main-content    { padding: 1rem; }
+  .cards-grid      { grid-template-columns: 1fr; }
+  .kpi-grid        { grid-template-columns: repeat(2, 1fr); }
+  .suggestions-hero{ flex-direction: column; }
+  .wallet-hero     { flex-direction: column; }
+  .auth-card       { padding: 1.75rem 1.25rem; }
+  .form-row        { grid-template-columns: 1fr; }
+  .modal-box       { padding: 1.25rem; }
+}
+
+// ════════════════════════════════════════════════════════════
+//  11. UTILITIES
+// ════════════════════════════════════════════════════════════
+
+.text-center { text-align: center; }
+.text-muted  { color: $gray-400; }
+.text-success{ color: $green; }
+.text-danger { color: $red; }
+.fw-bold     { font-weight: 700; }
+.mt-1 { margin-top: .5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mb-1 { margin-bottom: .5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.d-flex { display: flex; }
+.align-center { align-items: center; }
+.gap-1 { gap: .5rem; }
+.gap-2 { gap: 1rem; }

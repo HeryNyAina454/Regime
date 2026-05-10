@@ -28,3 +28,7 @@ $routes->post('suggestions/buy', 'Suggestions::buy');
 //pdf
 $routes->get('export/preview/(:num)', 'ExportPdf::preview/$1');
 $routes->get('export/pdf/(:num)',     'ExportPdf::generate/$1');
+
+//code promo
+$routes->get('wallet','Wallet::index');
+$routes->post('wallet/recharge','Wallet::recharge');

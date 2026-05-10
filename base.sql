@@ -220,3 +220,33 @@ INSERT INTO sport_activities (
 -- UPDATE wallets
 -- SET balance = 200.00
 -- WHERE user_id = 1;
+
+-- Table des codes portefeuille
+CREATE TABLE wallet_codes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(50) UNIQUE NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    is_used BOOLEAN DEFAULT FALSE,
+    used_by INT DEFAULT NULL,
+    used_at DATETIME DEFAULT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (used_by) REFERENCES users(id)
+);
+
+-- 15 codes de test (l'admin pourra en créer via back office plus tard)
+INSERT INTO wallet_codes (code, amount) VALUES
+('REGIME-START-10',  10.00),
+('REGIME-BOOST-20',  20.00),
+('REGIME-GOLD-50',   50.00),
+('HEALTH-2024-15',   15.00),
+('HEALTH-2024-25',   25.00),
+('FIT-PROMO-30',     30.00),
+('FIT-PROMO-05',      5.00),
+('WELCOME-USER-20',  20.00),
+('SLIM-CODE-10',     10.00),
+('SLIM-CODE-40',     40.00),
+('SPORT-PLUS-15',    15.00),
+('SPORT-PLUS-35',    35.00),
+('VIP-ACCESS-100',  100.00),
+('PROMO-ETE-20',     20.00),
+('PROMO-ETE-50',     50.00);
